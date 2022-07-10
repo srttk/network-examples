@@ -23,6 +23,10 @@ func main() {
 
 	case "tcp-server":
 		x.TcpServer(*port)
+
+	case "tcp-client":
+		x.TcpClient(*port)
+
 	case "http-server":
 		x.HttpServer(*port)
 

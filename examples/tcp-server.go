@@ -32,24 +32,26 @@ func TcpServer(port string) {
 			fmt.Println("New incoming connection")
 		}
 
-		go func(con net.Conn) {
-
-			buf := make([]byte, 1024)
-
-			len, err := con.Read(buf)
-
-			if err != nil {
-				fmt.Println("Buffer read error ")
-				return
-			}
-
-			fmt.Println("Message received \n ", string(buf[:len]))
-
-			con.Write([]byte("MESSAGE RECEIVED : OK"))
-
-			con.Close()
-
-		}(connection)
+		go process(connection)
 
 	}
+}
+
+func process(con net.Conn) {
+
+	defer con.Close()
+
+	buf := make([]byte, 1024)
+
+	len, err := con.Read(buf)
+
+	if err != nil {
+		fmt.Println("Buffer read error ")
+		return
+	}
+
+	fmt.Println("Message received \n ", string(buf[:len]))
+
+	con.Write([]byte("MESSAGE RECEIVED : OK"))
+
 }
