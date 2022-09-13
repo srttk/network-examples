@@ -13,6 +13,7 @@ func main() {
 	hostname := flag.String("hostname", "google.com", "Hostname ")
 	port := flag.String("port", "5252", "Port")
 	url := flag.String("url", "https://google.com", "URL")
+	key := flag.String("key", "key.pem", "Public key file")
 
 	flag.Parse()
 
@@ -32,7 +33,8 @@ func main() {
 
 	case "http-client":
 		x.HttpClient(*url)
-
+	case "ssh-client":
+		x.SshClient(*hostname, *key)
 	default:
 		fmt.Println("No example selected \nplease specify the exaple usig --example <example-name>")
 
