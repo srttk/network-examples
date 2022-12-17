@@ -33,6 +33,8 @@ func main() {
 
 	case "http-client":
 		x.HttpClient(*url)
+	case "ssh-server":
+		x.SshServer()
 	case "ssh-client":
 		x.SshClient(*hostname, *key)
 	default:
